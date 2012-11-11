@@ -97,9 +97,7 @@ Parses a script name, returning a return-delimited list of optional parameters f
 
 ## Deprecated functions
 
-These functions are implemented for the sake of backwards compatibility in those solutions using the FileMakerStandards.org functions, but their use is discouraged in favor of other techniques.
-
-These functions are all equivalent to simple combinations of other functions. These functions may be easier to type than the equivalent combinations of other functions, but tools like [TextExpander][], [Breevy][], and [Clip Manager][] make this a moot point. This approach also the resulting code more explicit about what logic is being applied to what data inputs, making the code more readable, especially to developers unfamiliar with the functions.
+These functions are implemented for the sake of backwards compatibility in those solutions using the current FileMakerStandards.org functions, but their use is discouraged. These functions are all equivalent to simple combinations of other functions. These functions may be easier to type than the equivalent combinations of other functions, but tools like [TextExpander][], [Breevy][], and [Clip Manager][] make this a moot point. This approach also makes the resulting code more explicit about what logic is being applied to what data inputs, making the code more readable, especially to developers unfamiliar with the functions.
 
 [TextExpander]: http://smilesoftware.com/TextExpander/index.html
 [Breevy]: http://www.16software.com/breevy/
