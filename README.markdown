@@ -63,6 +63,8 @@ The #AssignGlobal function parses an FSON dictionary into global script variable
 		List ( "name" ; "otherName" )
 	)	// variable $$name assigned "value"; $$foo and $$otherName are unaffected
 
+This approach to setting global variables is preferred over other methods that allow the dictionary itself to define what values should be assigned to globals because it makes more sense that the code that actually assigns the variables should have discretion over what type of variables gets assigned.
+
 ### #Get ( parameters ; name )
 
 The #Get function returns a named value from a dictionary.
