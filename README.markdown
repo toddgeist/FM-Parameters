@@ -41,11 +41,11 @@ The #Assign functions parse an FSON dictionary into local script variables. The 
 
 The #Assign functions return the FileMaker error code of any error encountered while parsing the dictionary.
 
-### #AssignSecure ( parameters ; nameWhiteList )
+### #AssignWhiteList ( parameters ; nameWhiteList )
 
-The #AssignSecure function parses an FSON dictionary into local script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
+The #AssignWhiteList function parses an FSON dictionary into local script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
 
-	#AssignSecure (
+	#AssignWhiteList (
 		# ( "name" ; "value" )
 		& # ( "foo" ; "bar" );
 		List ( "name" ; "otherName" )
@@ -89,9 +89,9 @@ Parses a script name, returning a return-delimited list of parameters required f
 
 ### ScriptOptionalParameterList ( scriptNameToParse )
 
-Parses a script name, returning a return-delimited list of optional parameters for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the #AssignSecure function to restrict variable assignment to parameters actually accepted by a script.
+Parses a script name, returning a return-delimited list of optional parameters for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the #AssignWhiteList function to restrict variable assignment to parameters actually accepted by a script.
 
-	#AssignSecure (
+	#AssignWhiteList (
 		Get ( ScriptParameter );
 		ScriptRequiredParameterList ( Get ( ScriptName ) )
 		& ScriptOptionalParameterList ( Get ( ScriptName ) )
