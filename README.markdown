@@ -2,8 +2,7 @@
 
 FM-Parameters is a series of tools, mostly custom functions, for creating and parsing serialized data objects in FileMaker. These are most frequently used for passing multiple pieces of data in script parameters and results. This repository is an incomplete work in progress, based on the recommended script parameter interface of [FileMakerStandards.org][1].
 
-[1]: http://filemakerstandards.org/pages/viewpage.action?pageId=557462
-	FileMakerStandards.org: Script Parameter Interface
+[1]: http://filemakerstandards.org/pages/viewpage.action?pageId=557462 "FileMakerStandards.org: Script Parameter Interface"
 
 ## The format
 
@@ -84,8 +83,7 @@ This is useful for validating that each parameter required by a script has been 
 
 Parses a script name, returning a return-delimited list of parameters required for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the VariablesNotEmpty function to validate that all required parameters have values.
 
-[2]: http://filemakerstandards.org/display/cs/Script+naming
-	FileMakerStandards.org: Script naming
+[2]: http://filemakerstandards.org/display/cs/Script+naming "FileMakerStandards.org: Script naming"
 
 ### ScriptOptionalParameterList ( scriptNameToParse )
 
@@ -152,15 +150,12 @@ Using this calculation instead of this function is preferred.
 
 The FSON object serialization format was inspired by an example in FileMaker's [documentation for the Let() function][3].
 
-[3]: http://www.filemaker.com/help/html/func_ref3.33.15.html
-	FileMaker, Inc.: Let
+[3]: http://www.filemaker.com/help/html/func_ref3.33.15.html "FileMaker, Inc.: Let"
 
 The dictionary functions by Six Fried Rice (mentioned in [introductory][4] and [supplemental][5] posts) were a significant inspiration for the behaviors of some functions and the "#" prefix notation.
 
-[4]: http://sixfriedrice.com/wp/passing-multiple-parameters-to-scripts-advanced/
-	Six Fried Rice: Passing Multiple Parameters to Scripts - Advanced
-[5]: http://sixfriedrice.com/wp/filemaker-dictionary-functions/
-	Six Fried Rice: FileMaker Dictionary Functions
+[4]: http://sixfriedrice.com/wp/passing-multiple-parameters-to-scripts-advanced/ "Six Fried Rice: Passing Multiple Parameters to Scripts - Advanced"
+[5]: http://sixfriedrice.com/wp/filemaker-dictionary-functions/ "Six Fried Rice: FileMaker Dictionary Functions"
 
 Dan Smith started the correspondence that inspired me to reform the existing FileMakerStandards.org solution for object serialization.
 
