@@ -1,0 +1,44 @@
+/**
+ * =====================================
+ * # ( name ; value )
+ *
+ * RETURNS:
+ *		An FSON-formatted name-value pair.
+ *
+ * PARAMETERS:
+ *		name: The name for the returned name-value pair. name can be any value that would
+ *		be a valid Let() variable name. Any dollar sign "$" characters will be stripped,
+ *		since these are reserved by the FSON format.
+ *		value: The value for the returned name-value pair.
+ *
+ * EXAMPLE:
+ *		# ( "name"; $value ) & # ( "foo" ; "bar" )
+ *
+ * DEPENDENCIES: none
+ *
+ * NOTES:
+ *		Stating that this function returns "an FSON-formatted name-value pair" is a
+ *		circular definition; the behavior of this function should be interpreted as the
+ *		*definition* of what a properly formatted FSON name-value pair is.
+ *
+ * HISTORY:
+ *		CREATED on 2012-11-10 by Jeremy Bante <http://scr.im/jbante>.
+ * =====================================
+ */
+
+Let ( [
+	~name =	// strip leading "$$" and "$"
+		Substitute (
+			"/*start*/" & name;
+			[ "/*start*/$$" ; "" ];
+			[ "/*start*/$" ; "" ];
+			[ "/*start*/" ; "" ]
+		)
+];
+	If ( not IsEmpty ( ~name );
+		~name
+		& " = "
+		& Quote ( value )
+		& ";¶"
+	)
+)
