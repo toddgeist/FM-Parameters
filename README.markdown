@@ -6,7 +6,7 @@ FM-Parameters is a series of tools, mostly custom functions, for creating and pa
 
 ## The format
 
-These functions manipulate data stored in a format that matches the variable-declaration format of FileMaker's Let () function. This is so that the format will appear familiar to FileMaker developers without additional background knowledge. This mirrors the relationship between JavaScript and JSON, so the format is colloquially called "FSON," as in "FileMaker-native JSON." I invite other suggestions because this is not a perfect metaphor; the incarnation of FSON supported by these functions does not support all the data structures that JSON does without extra effort on the developer's part.
+These functions manipulate data stored in a format that matches the variable-declaration format of FileMaker's Let () function. This is so that the format will appear familiar to FileMaker developers without additional background knowledge. This mirrors the relationship between JavaScript and JSON.
 
 ## The functions
 
@@ -35,7 +35,7 @@ By placing the defaults before the actual parameters, any values set by the actu
 
 ### #Assign ( parameters )
 
-The #Assign functions parse an FSON dictionary into local script variables. The name from each name-value pair is used as the variable name, and the value from each pair is set to that variable's value.
+The #Assign functions parse a Let format dictionary into local script variables. The name from each name-value pair is used as the variable name, and the value from each pair is set to that variable's value.
 
 	#Assign ( # ( "name" ; "value" ) )	// variable $name assigned "value"
 
@@ -43,7 +43,7 @@ The #Assign functions return the FileMaker error code of any error encountered w
 
 ### #AssignWhiteList ( parameters ; nameWhiteList )
 
-The #AssignWhiteList function parses an FSON dictionary into local script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
+The #AssignWhiteList function parses a Let format dictionary into local script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
 
 	#AssignWhiteList (
 		# ( "name" ; "value" )
@@ -55,7 +55,7 @@ This function can prevent an "injection" of unexpected variables that might caus
 
 ### #AssignGlobal ( parameters ; nameWhiteList )
 
-The #AssignGlobal function parses an FSON dictionary into global script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
+The #AssignGlobal function parses a Let format dictionary into global script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
 
 	#AssignGlobal (
 		# ( "name" ; "value" )
@@ -73,23 +73,23 @@ The #Get function returns a named value from a dictionary.
 
 Unlike the #Assign functions, #Get will not affect any variables, which can be useful when a named value only needs to be used in one calculation, or to assign a named value to a variable with a different name.
 
-### VariablesNotEmpty ( parameterNameList )
+### VerifyVariablesNotEmpty ( parameterNameList )
 
 Returns True (1) if each of the parameters in parameterNameList has been assigned to a non-empty local script variable of the same name. Returns False (0) if any variable defined by parameterNameList is empty.
 
 	VariablesNotEmpty ( List ( "parameter1" ; "parameter2" ) )
 
-This is useful for validating that each parameter required by a script has been successfully assigned before proceeding.
+This is useful for verifying that each parameter required by a script has been successfully assigned before proceeding.
 
 ### ScriptRequiredParameterList ( scriptNameToParse )
 
-Parses a script name, returning a return-delimited list of parameters required for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the VariablesNotEmpty function to validate that all required parameters have values.
+Parses a script name, returning a return-delimited list of parameters required for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the VariablesNotEmpty function to validate that all required parameters have values. In practice, developers may want to modify this function to always use the current Get ( ScriptName ) and not require the argument.
 
 [2]: http://filemakerstandards.org/display/cs/Script+naming "FileMakerStandards.org: Script naming"
 
 ### ScriptOptionalParameterList ( scriptNameToParse )
 
-Parses a script name, returning a return-delimited list of optional parameters for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the #AssignWhiteList function to restrict variable assignment to parameters actually accepted by a script.
+Parses a script name, returning a return-delimited list of optional parameters for that script. This function assumes that the script name conforms to the FileMakerStandards.org [naming convention for scripts][2]. This is useful to generate the argument used by the #AssignWhiteList function to restrict variable assignment to parameters actually accepted by a script. In practice, developers may want to modify this function to always use the current Get ( ScriptName ) and not require the argument.
 
 	#AssignWhiteList (
 		Get ( ScriptParameter );
@@ -116,7 +116,7 @@ The #AssignScriptParameters function will assign all named values in the script 
 A combination of the #Assign, VariablesNotEmpty, and ScriptRequiredParameterList functions is the preferred way to replicate this behavior:
 
 	Set Variable [$ignoreMe; Value:#Assign ( Get ( ScriptParameter ) )]
-	If [not VariablesNotEmpty ( ScriptRequiredParameterList ( Get ( ScriptName ) ) )]
+	If [not VerifyVariablesNotEmpty ( ScriptRequiredParameterList ( Get ( ScriptName ) ) )]
 		Exit Script [Result:# ( "error" ; 10 )	// Requested data is missing]
 	End If
 
