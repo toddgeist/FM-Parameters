@@ -41,29 +41,25 @@ The #Assign functions parse a Let format dictionary into local script variables.
 
 The #Assign functions return the FileMaker error code of any error encountered while parsing the dictionary.
 
-### #AssignWhiteList ( parameters ; nameWhiteList )
+### #Filter ( parameters ; filterParameters )
 
-The #AssignWhiteList function parses a Let format dictionary into local script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
+The #Filter function returns a Let format dictionary containing only those name-value pairs where the name is included in the return-delimited list filterParameters.
 
-	#AssignWhiteList (
+	#Assign ( #Filter (
 		# ( "name" ; "value" )
 		& # ( "foo" ; "bar" );
 		List ( "name" ; "otherName" )
-	)	// variable $name assigned "value"; $foo and $otherName are unaffected
+	) )	// variable $name assigned "value"; $foo and $otherName are unaffected
 
 This function can prevent an "injection" of unexpected variables that might cause problems.
 
-### #AssignGlobal ( parameters ; nameWhiteList )
+### #AssignGlobal ( parameters )
 
-The #AssignGlobal function parses a Let format dictionary into global script variables, but only assigns variables defined by the nameWhiteList argument, which contains a return-delimited list of names to assign.
+The #AssignGlobal function parses a Let format dictionary into global script variables
 
-	#AssignGlobal (
-		# ( "name" ; "value" )
-		& # ( "foo" ; "bar" );
-		List ( "name" ; "otherName" )
-	)	// variable $$name assigned "value"; $$foo and $$otherName are unaffected
+	#AssignGlobal ( # ( "name" ; "value" ) )	// variable $$name assigned "value"
 
-This approach to setting global variables is preferred over other methods that allow the dictionary itself to define what values should be assigned to globals because it makes more sense that the code that actually assigns the variables should have discretion over what type of variables gets assigned.
+This approach to setting global variables is preferred over other methods that allow the dictionary itself to define what values should be assigned to globals because it makes more sense that the code that actually assigns the variables should have discretion over what type of variable gets assigned.
 
 ### #Get ( parameters ; name )
 
