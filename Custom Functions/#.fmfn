@@ -19,7 +19,7 @@
  * NOTES:
  *		Stating that this function returns "an FSON-formatted name-value pair" is a
  *		circular definition; the behavior of this function should be interpreted as the
- *		*definition* of what a properly formatted FSON name-value pair is.
+ *		definition of what a properly formatted FSON name-value pair is.
  *
  * HISTORY:
  *		CREATED on 2012-11-10 by Jeremy Bante <http://scr.im/jbante>.

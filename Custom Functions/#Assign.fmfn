@@ -1,0 +1,42 @@
+/**
+ * =====================================
+ * #Assign ( parameters )
+ *
+ * PURPOSE:
+ *		Parses an FSON dictionary of name-value parameters into a series of locally scoped
+ *		$variables.
+ *
+ * RETURNS:
+ *		FileMaker's error code from any errors encountered during evaluation.
+ *
+ * PARAMETERS:
+ *		parameters: An FSON format dictionary, such as produced by the # ( name ; value )
+ *		function.
+ *
+ * DEPENDENCIES: none
+ *
+ * NOTES:
+ *		Notes go here
+ *
+ * HISTORY:
+ *		CREATED on 2012-11-11 by Jeremy Bante <http://scr.im/jbante>.
+ * =====================================
+ */
+
+Let ( [
+	~parameters =	// add leading $ to each parameter
+		Substitute ( ¶ & parameters & "~ = $~";
+			[ "¶$" ; ¶ ];	// strip any existing single $ for backwards compatibility
+			[ ¶ ; "¶$" ];	// add $ so values are assigned to local variables
+			[ "$¶" ; "" ]	// correct for any empty lines in input
+		);
+	~error =
+		EvaluationError ( Evaluate (
+			"Let ( [¶"
+			& ~parameters
+			& "¶]; True )"
+		) )
+];
+	~error = 0	// indicate success or failure of Evaluate()
+	or Let ( $#Assign.error = ~error ; False )	// only evaluates on error
+)
