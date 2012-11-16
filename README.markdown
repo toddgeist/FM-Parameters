@@ -12,7 +12,7 @@ These functions manipulate data stored in a format that matches the variable-dec
 
 ### # ( name ; value )
 
-The # ( name ; value ) function creates an FSON name-value pair. A dictionary data structure can be created by concatenating several calls to #() as if they were plain text. FSON also supports nested dictionaries.
+The # ( name ; value ) function creates a Let notation name-value pair. A dictionary data structure can be created by concatenating several calls to #() as if they were plain text. Let notation also supports nested dictionaries.
 
 	# ( "name" ; "value" )
 	& # ( "outerName" ;
@@ -40,6 +40,8 @@ The #Assign functions parse a Let format dictionary into local script variables.
 	#Assign ( # ( "name" ; "value" ) )	// variable $name assigned "value"
 
 The #Assign function returns True (1) if there was no error detected while assigning the values to variables, and returns False (0) otherwise. If there was an error detected, FileMaker's error code is assigned to the $#Assign.error variable.
+
+Some legacy versions of the # ( name ; value ) function allow developers to set names intended for global variables. The # ( name ; value ) function defined here will not allow that, but the #Assign function currently will still set legacy global variables in dictionaries for backwards compatibility. This is likely to change in the future.
 
 ### #Filter ( parameters ; filterParameters )
 
@@ -146,7 +148,7 @@ Using this calculation instead of this function is preferred.
 
 ## Acknowledgements
 
-The FSON object serialization format was inspired by an example in FileMaker's [documentation for the Let() function][3].
+The Let format was inspired by an example in FileMaker's [documentation for the Let() function][3].
 
 [3]: http://www.filemaker.com/help/html/func_ref3.33.15.html "FileMaker, Inc.: Let"
 

@@ -28,7 +28,8 @@ Let ( [
 		Substitute ( ¶ & parameters & "~ = $~";
 			[ "¶$" ; ¶ ];	// strip any existing single $ for backwards compatibility
 			[ ¶ ; "¶$" ];	// add $ so values are assigned to local variables
-			[ "$¶" ; "" ]	// correct for any empty lines in input
+			[ "$¶" ; "" ];	// correct for any empty lines in input
+			[ "¶$/" ; "¶/" ]	// don't put $ before comment notation error lines
 		);
 	~error =
 		EvaluationError ( Evaluate (
