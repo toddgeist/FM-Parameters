@@ -39,7 +39,7 @@ The #Assign functions parse a Let format dictionary into local script variables.
 
 	#Assign ( # ( "name" ; "value" ) )	// variable $name assigned "value"
 
-The #Assign functions return the FileMaker error code of any error encountered while parsing the dictionary.
+The #Assign function returns True (1) if there was no error detected while assigning the values to variables, and returns False (0) otherwise. If there was an error detected, FileMaker's error code is assigned to the $#Assign.error variable.
 
 ### #Filter ( parameters ; filterParameters )
 
@@ -60,6 +60,8 @@ The #AssignGlobal function parses a Let format dictionary into global script var
 	#AssignGlobal ( # ( "name" ; "value" ) )	// variable $$name assigned "value"
 
 This approach to setting global variables is preferred over other methods that allow the dictionary itself to define what values should be assigned to globals because it makes more sense that the code that actually assigns the variables should have discretion over what type of variable gets assigned.
+
+The #AssignGlobal function return True (1) if there was no error detected while assigning the values to variables, and returns False (0) otherwise. If there was an error detected, FileMaker's error code is assigned to the $#AssignGlobal.error variable.
 
 ### #Get ( parameters ; name )
 
